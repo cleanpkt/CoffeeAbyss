@@ -15,6 +15,7 @@
   --panel-bg: #f3f4f6;
   --panel-edge: #111827;
   --pixel-shadow: #111827;
+  --topbar-h: 56px;
 }
 
 * { box-sizing: border-box; }
@@ -37,9 +38,10 @@ body::after { content: none; }
   padding: 8px 12px;
   border-bottom: 4px solid var(--panel-edge);
   background: var(--panel);
-  position: sticky;
-  top: 0;
-  z-index: 50;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: var(--topbar-h);
 }
 .topbar h1 { margin: 0; font-size: 20px; letter-spacing: 0; font-variant-ligatures: none; }
 .topbar .stats { display: flex; gap: 12px; color: var(--muted); }
@@ -48,18 +50,18 @@ body::after { content: none; }
   display: grid;
   grid-template-columns: clamp(200px, 28vw, 360px) clamp(200px, 24vw, 320px) 1fr;
   gap: 16px;
-  padding: 12px 12px 24px;
+  padding: calc(12px + var(--topbar-h)) 12px 24px;
   align-items: start;
 }
 
 .left {
   position: sticky;
-  top: 0;
-  height: calc(100vh - 60px);
+  top: var(--topbar-h);
+  height: calc(100vh - var(--topbar-h));
   display: grid;
   grid-template-rows: 1fr auto;
 }
-.status { position: sticky; top: 0; }
+.status { position: sticky; top: var(--topbar-h); }
 .mug-wrap { display: grid; place-items: center; height: 100%; }
 
 .mug {
@@ -179,6 +181,9 @@ button, input, select, textarea { font-family: inherit; }
 }
 .status-panel h2 { margin: 0 0 8px; font-size: 18px; }
 .stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 4px 0; }
+.stat-row { writing-mode: horizontal-tb; }
+.stat-row span { white-space: nowrap; }
+.stat-row.small span:last-child { white-space: normal; }
 .stat-row.small { font-size: 12px; color: var(--muted); }
 .share { margin-top: 8px; display: flex; }
 .share-btn { width: 100%; background: #000; color: #fff; border-color: #000; box-shadow: 0 4px 0 0 #000; }

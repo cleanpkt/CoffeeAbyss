@@ -5,15 +5,15 @@ const SAVE_KEY = "coffeeAbyss.save";
 
 // Click boosters (multiple types)
 const CLICK_BOOSTERS_DEF = [
-  { id: 'handTamping', name: 'ハンドタンピング', baseCost: 50, growth: 1.15, add: 1 },
-  { id: 'baristaHands', name: 'バリスタの手さばき', baseCost: 200, growth: 1.15, add: 2 },
-  { id: 'caffeineAwaken', name: 'カフェイン覚醒', baseCost: 800, growth: 1.15, add: 3 },
-  { id: 'doublePot', name: '二重ポット法', baseCost: 3000, growth: 1.15, add: 5 },
-  { id: 'infiniteStir', name: '無限攪拌棒', baseCost: 12000, growth: 1.15, add: 8 },
-  { id: 'rhythmPour', name: 'リズム注湯', baseCost: 48000, growth: 1.16, add: 13 },
-  { id: 'hyperFocus', name: '超集中モード', baseCost: 190000, growth: 1.16, add: 21 },
-  { id: 'quantumTap', name: '量子タップ', baseCost: 760000, growth: 1.17, add: 34 },
-  { id: 'divineFinger', name: '神の一指（Divine Finger）', baseCost: 3000000, growth: 1.18, add: 55 },
+  { id: 'handTamping', name: 'ハンドタンピング', baseCost: 50, growth: 1.15, add: 1, desc: '抽出前に粉を手作業で均一に押し固める行為。わずかな力加減の違いが湯の浸透性を変え、抽出効率を高めるとされる。' },
+  { id: 'baristaHands', name: 'バリスタの手さばき', baseCost: 200, growth: 1.15, add: 2, desc: '熟練の注湯技術を模倣。安定した回転運動により、液体の抽出効率が強化される。' },
+  { id: 'caffeineAwaken', name: 'カフェイン覚醒', baseCost: 800, growth: 1.15, add: 3, desc: '一時的な神経伝達速度の上昇。操作速度が実質的に倍加し、結果として抽出量が向上する。' },
+  { id: 'doublePot', name: '二重ポット法', baseCost: 3000, growth: 1.15, add: 5, desc: '一度の操作で二つのポットを同時に抽出。出力の並列化を実現した手法。' },
+  { id: 'infiniteStir', name: '無限攪拌棒', baseCost: 12000, growth: 1.15, add: 8, desc: '摩耗しない素材でできた撹拌棒。物理的限界を超えた回転数を保持できる。' },
+  { id: 'rhythmPour', name: 'リズム注湯', baseCost: 48000, growth: 1.16, add: 13, desc: '音楽的リズムに同期して湯を注ぐ。心理的快楽によりクリック効率が倍増すると報告されている。' },
+  { id: 'hyperFocus', name: '超集中モード', baseCost: 190000, growth: 1.16, add: 21, desc: '使用者の脳波を同期させ、無意識下でのマイクロクリックを発生させる。' },
+  { id: 'quantumTap', name: '量子タップ', baseCost: 760000, growth: 1.17, add: 34, desc: '一度のクリックが多世界的に複製され、観測時にすべての結果が集約される。' },
+  { id: 'divineFinger', name: '神の一指（Divine Finger）', baseCost: 3000000, growth: 1.18, add: 55, desc: '神話的存在の介入を仮定。人知を超える圧力が指先に宿り、抽出量が桁違いに増加する。' },
 ];
 
 const FACILITIES_DEF = [
@@ -406,7 +406,7 @@ function renderShop() {
           <div class="price" id="price-${b.id}">-</div>
           <div class="owned">所持: <span id="owned-${b.id}">0</span></div>
         </div>
-        <div class="tooltip">クリック強化：クリック毎 +${fmt.format(b.add)}cc。購入ごとに価格が上昇します。</div>
+        <div class="tooltip">${b.desc ? b.desc : `クリック強化：クリック毎 +${fmt.format(b.add)}cc。購入ごとに価格が上昇します。`}</div>
       `;
       blist.appendChild(item);
     }
