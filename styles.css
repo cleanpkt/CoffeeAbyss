@@ -124,6 +124,7 @@ body::after { content: none; }
   cursor: pointer;
   transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
 }
+.buy-btn.small { padding: 6px 10px; font-size: 12px; }
 .buy-btn:disabled { opacity: .5; cursor: not-allowed; }
 .buy-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 0 0 var(--panel-edge); }
 .buy-btn:active:not(:disabled) { transform: translateY(0); box-shadow: 0 2px 0 0 var(--panel-edge); }
@@ -158,16 +159,48 @@ body::after { content: none; }
   font-size: 14px;
 }
 
-.footer { display: flex; justify-content: center; padding: 16px; color: var(--muted); border-top: 4px solid var(--panel-edge); background: var(--panel); }
+.footer { position: sticky; bottom: 0; z-index: 999; padding: 10px 12px; color: var(--muted); border-top: 4px solid var(--panel-edge); background: var(--panel); }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: 1200px; margin: 0 auto; }
+.layout-switch { display: flex; gap: 8px; }
 .link { background: none; border: none; color: #64748b; cursor: pointer; text-decoration: underline; transition: transform 120ms ease; }
 .link:hover { transform: translateY(-2px); }
 
 @media (max-width: 920px) {
-  .left { height: auto; }
-  .mug { width: min(60vmin, 320px); }
-  .container { grid-template-columns: 1fr; }
+  :root { --topbar-h: 48px; }
+  .container { grid-template-columns: 1fr; padding: calc(8px + var(--topbar-h)) 8px 16px; gap: 12px; }
+  .left { position: static; height: auto; }
   .status { position: static; height: auto; }
+  .mug { width: min(74vw, 360px); }
+  .shop { padding: 10px; }
+  .item { grid-template-columns: 1fr; padding: 8px; }
+  .buy { justify-items: stretch; }
+  .buy-btn { width: 100%; }
+  .footer-inner { flex-direction: column; align-items: stretch; gap: 8px; }
 }
+
+/* Tablet: collapse to two columns */
+@media (max-width: 1280px) {
+  .container { grid-template-columns: clamp(180px, 34vw, 320px) 1fr; }
+}
+
+/* Disable hover tooltips on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .tooltip { display: none; }
+}
+
+/* Forced layout overrides */
+.force-desktop .container { grid-template-columns: clamp(200px, 28vw, 360px) clamp(200px, 24vw, 320px) 1fr !important; }
+.force-desktop .left { position: sticky !important; top: var(--topbar-h) !important; height: calc(100vh - var(--topbar-h)) !important; }
+.force-desktop .status { position: sticky !important; top: var(--topbar-h) !important; }
+
+.force-mobile .container { grid-template-columns: 1fr !important; padding: calc(8px + var(--topbar-h)) 8px 16px !important; gap: 12px !important; }
+.force-mobile .left { position: static !important; height: auto !important; }
+.force-mobile .status { position: static !important; height: auto !important; }
+.force-mobile .mug { width: min(74vw, 360px) !important; }
+.force-mobile .item { grid-template-columns: 1fr !important; }
+.force-mobile .buy { justify-items: stretch !important; }
+.force-mobile .buy-btn { width: 100% !important; }
+.force-mobile .tooltip { display: none !important; }
 
 /* Ensure pixel font applies to form controls */
 button, input, select, textarea { font-family: inherit; }

@@ -2,6 +2,7 @@
 
 const VERSION = 2;
 const SAVE_KEY = "coffeeAbyss.save";
+const LAYOUT_KEY = "coffeeAbyss.layout"; // 'desktop' | 'mobile' | undefined
 
 // Click boosters (multiple types)
 const CLICK_BOOSTERS_DEF = [
@@ -60,6 +61,8 @@ const el = {
   reset: document.getElementById("reset"),
   clickSound: document.getElementById("clickSound"),
   shareBtn: document.getElementById('shareBtn'),
+  forceDesktop: document.getElementById('forceDesktop'),
+  forceMobile: document.getElementById('forceMobile'),
 };
 
 const fmt = new Intl.NumberFormat("ja-JP");
@@ -362,6 +365,33 @@ if (el.shareBtn) {
     window.open(url, 'tweet', 'width=560,height=420,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes');
   });
 }
+
+// Layout toggle
+function applyLayout(mode) {
+  document.body.classList.remove('force-desktop', 'force-mobile');
+  if (mode === 'desktop') document.body.classList.add('force-desktop');
+  if (mode === 'mobile') document.body.classList.add('force-mobile');
+  // toggle active visual state
+  [el.forceDesktop, el.forceMobile].forEach(b => b && b.classList.remove('active'));
+  if (mode === 'desktop' && el.forceDesktop) el.forceDesktop.classList.add('active');
+  if (mode === 'mobile' && el.forceMobile) el.forceMobile.classList.add('active');
+}
+
+function saveLayout(mode) {
+  try { localStorage.setItem(LAYOUT_KEY, mode || ''); } catch {}
+}
+
+function loadLayout() {
+  try { return localStorage.getItem(LAYOUT_KEY) || ''; } catch { return ''; }
+}
+
+const initialLayout = loadLayout();
+if (initialLayout === 'desktop' || initialLayout === 'mobile') {
+  applyLayout(initialLayout);
+}
+
+el.forceDesktop?.addEventListener('click', () => { applyLayout('desktop'); saveLayout('desktop'); });
+el.forceMobile?.addEventListener('click', () => { applyLayout('mobile'); saveLayout('mobile'); });
 
 // Render facilities dynamically
 function renderShop() {
