@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coffee Abyss — クリックで淹れる</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Coffee Abyss</h1>
+      <div class="stats">
+        <span id="cps">+0 cc/s</span>
+        <span id="clickPower">+1/クリック</span>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="left">
+        <div class="mug-wrap">
+          <button id="mug" class="mug" aria-label="コーヒーを注ぐ">
+            <img src="images/coffee.png" alt="コーヒーマグ" class="mug-img" />
+            <div id="score" class="score">0 cc</div>
+          </button>
+        </div>
+        <div id="offlineNotice" class="notice" hidden></div>
+      </section>
+
+      <section class="status">
+        <div class="status-panel">
+          <h2>ステータス</h2>
+          <div class="stat-row"><span>合計コーヒー</span><strong id="stat-total">0 cc</strong></div>
+          <div class="stat-row"><span>毎秒</span><strong id="stat-cps">0 cc/s</strong></div>
+          <div class="stat-row small"><span>内訳</span><span id="stat-cps-breakdown">基本 1 + 施設 0 + クリック +0/クリック</span></div>
+          <div class="stat-row"><span>クリック</span><strong id="stat-click">+1/クリック</strong></div>
+          <div class="stat-row"><span>マグ換算</span><strong id="stat-cups">0 杯</strong></div>
+          <div class="stat-row small"><span>海水比</span><span id="stat-sea">0%</span></div>
+          <div class="share">
+            <button id="shareBtn" class="buy-btn share-btn">抽出したコーヒーの量を報告する</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="shop">
+        <h2>ショップ</h2>
+
+        <div class="shop-section">
+          <h3>クリックブースター</h3>
+          <div id="boostersList" class="boosters"></div>
+        </div>
+
+        <div class="shop-section">
+          <h3>施設（自動増加）</h3>
+          <div id="facilitiesList" class="facilities"></div>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <button id="reset" class="link">セーブ消去</button>
+    </footer>
+
+    <audio id="clickSound" src="sounds/pon.mp3" preload="auto"></audio>
+    <script src="main.js"></script>
+  </body>
+  </html>
