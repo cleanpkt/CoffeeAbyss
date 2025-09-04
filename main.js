@@ -357,7 +357,7 @@ if (el.shareBtn) {
     const cups = Math.floor(state.coffee / MUG_CC);
     const cc = Math.floor(state.coffee);
     const ccFmt = fmt.format(cc);
-    const text = `私は${cups}杯分のコーヒー（${ccFmt}cc）を抽出しました ☕️ #CoffeAbyss https://CoffeeAbyss.vercel.app/`;
+    const text = `私は${cups}杯分のコーヒー（${ccFmt}cc）を抽出しました ☕️ #CoffeAbyss https://coffee-abyss.vercel.app/`;
     const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
     window.open(url, 'tweet', 'width=560,height=420,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes');
   });
